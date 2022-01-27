@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "The Joel Hilton Film Collection";
+}
+
+<!-- Header-->
+<header class="bg-primary bg-gradient text-white">
+    <div class="container px-4 text-center">
+        <h1 class="fw-bolder">Welcome to the Joel Hilton Movie Collection</h1>
+    </div>
+</header>
+<!-- About section-->
+<section id="about">
+    <div class="container px-4">
+        <div class="row gx-4 justify-content-center">
+            <div class="col-lg-8">
+                <h2>About this website</h2>
+                <img src="~/img/JoelHiltonHeadshot.jpg" />
+                <p class="lead">
+                    Joel Hilton is very into movies. So into movies, in fact, that he minored
+                    in Film Studies at BYU, contracts as a movie reviewer for ClearPlay, and does a weekly podcast
+                    with a couple friends about movies called Baconsale.
+                    Joel needed a system to keep track of his ever-expanding movie collection. He only allows
+                    movies he deems worthy into his collection. As his collection grows, this website tracks the movies
+                    that are added into the fold.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Other Pages section-->
+<section class="bg-light">
+    <div class="container px-4">
+        <div class="row gx-4 justify-content-center">
+            <div class="col-lg-8">
+                <h2>Add to the movie database:</h2>
+                <a asp-controller="Home" asp-action="Movies">Movie Database</a>
+            </div>
+            <div class="col-lg-8">
+                <h2>Listen to podcasts</h2>
+                <a asp-controller="Home" asp-action="Podcast">Podcasts</a>
+            </div>
+        </div>
+    </div>
+</section>

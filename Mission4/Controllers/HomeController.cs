@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Mission4.Models;
 using System;
@@ -11,12 +12,11 @@ namespace Mission4.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+
         private DatabaseContext databaseContext { get; set; }
 
-        public HomeController(ILogger<HomeController> logger, DatabaseContext someName)
+        public HomeController(DatabaseContext someName)
         {
-            _logger = logger;
             databaseContext = someName;
         }
 
@@ -33,27 +33,63 @@ namespace Mission4.Controllers
         [HttpGet]
         public IActionResult Movies()
         {
+            ViewBag.Categories = databaseContext.Categories.ToList();
             return View();
         }
 
         [HttpPost]
         public IActionResult Movies(AddToDatabase ad)
         {
-            databaseContext.Add(ad);
-            databaseContext.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                databaseContext.Add(ad);
+                databaseContext.SaveChanges();
 
-            return View("Confirmation", ad);
+                return View("Confirmation", ad);
+            }
+            else
+            {
+                ViewBag.Categories = databaseContext.Categories.ToList();
+                return View();
+            }
+            
+            
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        public IActionResult Display()
+        {
+            var movies = databaseContext.addedMovies
+                .Include(x => x.Category)
+                .OrderBy(x => x.Category)
+                .ToList();
+
+            return View(movies);
+        }
+      
+        [HttpGet]
+        public IActionResult Edit(int movieid)
+        {
+            ViewBag.Categories = databaseContext.Categories.ToList();
+
+            var movie = databaseContext.addedMovies.Single(x => x.MovieId == movieid);
+
+            return View("Movies", movie);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(AddToDatabase ad)
+        {
+            databaseContext.Update(ad);
+            databaseContext.SaveChanges();
+            
+            return RedirectToAction("Display");
+        }
+
+        public IActionResult Delete()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

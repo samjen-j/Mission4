@@ -10,20 +10,30 @@ namespace Mission4.Models
     {
         [Key]
         [Required]
-        public int ApplicationId { get; set; }
-        [Required]
-        public string Category { get; set; }
-        [Required]
+        public int MovieId { get; set; }
+        
+        [Required(ErrorMessage ="Put in the title")]
         public string Title { get; set; }
-        [Required]
+        
+        [Required(ErrorMessage = "Put in the year")]
         public ushort Year { get; set; }
-        [Required]
+        
+        [Required(ErrorMessage = "Put in the director")]
         public string Director { get; set; }
-        [Required]
+        
+        [Required(ErrorMessage = "Put in the rating")]
         public string Rating { get; set; }
+        
         public bool Edited { get; set; }
+        
         public string Lent { get; set; }
+        
         [StringLength(25)]
         public string Notes { get; set; }
+
+        //Build foreign key
+        [Required(ErrorMessage = "Put in the category")]
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }

@@ -86,9 +86,20 @@ namespace Mission4.Controllers
             return RedirectToAction("Display");
         }
 
-        public IActionResult Delete()
+        [HttpGet]
+        public IActionResult Delete(int movieid)
         {
-            return View();
+            var movie = databaseContext.addedMovies.Single(x => x.MovieId == movieid);
+            return View(movie);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(AddToDatabase ad)
+        {
+            databaseContext.Remove(ad);
+            databaseContext.SaveChanges();
+
+            return RedirectToAction("Display");
         }
 
     }

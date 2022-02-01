@@ -34,7 +34,7 @@ namespace Mission4.Models
 
                 new AddToDatabase
                 {
-                    ApplicationId = 1,
+                    MovieId = 1,
                     CategoryId = 1,
                     Title = "Avengers",
                     Year = 2012,
@@ -46,7 +46,7 @@ namespace Mission4.Models
                 },
                  new AddToDatabase
                  {
-                     ApplicationId = 2,
+                     MovieId = 2,
                      CategoryId = 1,
                      Title = "The Dark Knight",
                      Year = 2008,
@@ -58,7 +58,7 @@ namespace Mission4.Models
                  },
                   new AddToDatabase
                   {
-                      ApplicationId = 3,
+                      MovieId = 3,
                       CategoryId = 1,
                       Title = "Indiana Jones and the Raiders of the Lost Ark",
                       Year = 1981,
